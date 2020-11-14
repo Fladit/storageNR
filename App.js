@@ -1,48 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { StyleSheet, Text, View, FlatList, ScrollView, Alert} from 'react-native';
 import Box from "./src/Components/Box/Box";
 import AddBox from "./src/Components/AddBox/AddBox";
+import {getBoxes, addNewBox} from "./src/database";
 
 export default function App() {
-  const [boxes, setBoxes] = useState([
-    {
-      title: 'test',
-      id: '1'
-    },
-    {
-      title: 'test',
-      id: '2'
-    },
-    {
-      title: 'test',
-      id: '3'
-    },
-    {
-      title: 'test',
-      id: '4'
-    },
-    {
-      title: 'test',
-      id: '5'
-    },
-    {
-      title: 'test',
-      id: '6'
-    },
-    {
-      title: 'test',
-      id: '7'
-    },
-  ])
+  const [boxes, setBoxes] = useState([])
 
+  useEffect(() => {
+    getBoxes().then(setBoxes).catch(e => {
+      console.log("Ошибка получения информации о коробках", e.message)
+      Alert.alert("Ошибка загрузки информации о коробках")
+    })
+  }, [])
 
   function newBox(title) {
-    newBox = {
+    const boxNew = {
       title,
       id: (boxes.length + 1),
+      isEmpty: true,
     }
-    setBoxes(boxes => [...boxes, newBox])
+    addNewBox(boxNew).then(value => {
+      setBoxes(boxes => [...boxes, boxNew])
+    }).catch( e => {
+      Alert.alert("Ошибка добавления новой коробки")
+      console.log("Ошибка добавления коробки: ", e.message)
+    })
   }
 
   return (

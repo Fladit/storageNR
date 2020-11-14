@@ -2,11 +2,11 @@ import React from 'react';
 import {Text, View, Image, StyleSheet} from "react-native";
 
 const Box = ({box}) => {
-    console.log()
+    let boxImage = 'empty-box.png'
     return (
         <View style = {styles.container}>
             <Text style = {styles.text}>{box.title}</Text>
-            <Image style = {styles.image} source = {require('../../../assets/empty-box.png')}/>
+            <Image style = {styles.image} source = {require(`../../../assets/${boxImage}`)}/>
             <Text style = {styles.text}>{box.id}</Text>
         </View>
     );
