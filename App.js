@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView, Alert} from 'react-native';
+import { StyleSheet, Text, View, FlatList, ScrollView, Alert, Dimensions} from 'react-native';
 import Box from "./src/Components/Box/Box";
 import AddBox from "./src/Components/AddBox/AddBox";
 import {getBoxes, addNewBox} from "./src/database";
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    minHeight: Math.round(Dimensions.get('window').height),
   },
   inputContainer: {
     width:'100%',
