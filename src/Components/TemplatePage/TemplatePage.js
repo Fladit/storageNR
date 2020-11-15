@@ -4,13 +4,15 @@ import Box from "../Box/Box";
 import AddNewElement from "../AddBox/AddNewElement";
 import {getElementsFromDBByKey, addNewElementToDB} from "../../database";
 
-export default function TemplatePage({elements, addFunction, buttonTitle, buttonPlaceHolder, Component}) {
+export default function TemplatePage({elements, addFunction, changeFunction, navigation,
+                                         buttonTitle, buttonPlaceHolder, Component}) {
 
     return (
         <View style={styles.container}>
             <AddNewElement addElementFunction = {addFunction} buttonTitle={buttonTitle} buttonPlaceHolder={buttonPlaceHolder}/>
             <ScrollView style = {styles.list} contentContainerStyle = {styles.listContent}>
-                {elements.map(element => <Component element = {element} key = {element.id} />)}
+                {elements.map(element => <Component element = {element} changeFunction = {changeFunction}
+                                                    navigation = {navigation} key = {element.id} />)}
             </ScrollView>
         </View>
     );
@@ -38,3 +40,5 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     }
 });
+
+

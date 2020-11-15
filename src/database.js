@@ -6,10 +6,10 @@ export const CONTAINERS_KEY = "container"
 
 export async function addNewElementToDB(element, KEY) {
     try {
-        const boxes = JSON.parse(await AsyncStorage.getItem(KEY))
-        boxes.push(element)
+        const elements = JSON.parse(await AsyncStorage.getItem(KEY))
+        elements.push(element)
         try {
-            await AsyncStorage.setItem(KEY, JSON.stringify(boxes))
+            await AsyncStorage.setItem(KEY, JSON.stringify(elements))
         } catch (e) {
             console.log(e.message)
         }
@@ -35,4 +35,29 @@ export const getElementsFromDBByKey = async (KEY) => {
     console.log(elements)
     return elements
 }
+
+export const assignNewDataByKey = async (KEY, value) => {
+    await AsyncStorage.setItem(KEY, JSON.stringify(value))
+}
+
+
+
+export const changeElementFromDBByID = async (KEY, id, newValue) => {
+    console.log("changing... on ", newValue)
+    let elements = await getElementsFromDBByKey(KEY)
+    if (elements.length > 0) {
+        elements = elements.map(element => {
+            if (element.id === id)
+                return newValue
+            return element
+        })
+        console.log("Новый массив: ", elements)
+        await assignNewDataByKey(KEY, elements)
+    }
+    console.log("returned value after change: ", elements)
+    return elements
+}
+
+
+
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import {Text, View, Image, StyleSheet} from "react-native";
 
-const Box = ({element}) => {
-    let boxImage = `../../../assets/${element.isEmpty? 'empty-box.png' : 'full-box.png'}`
+const Box = ({element, navigation, changeFunction}) => {
 
     return (
-        <View style = {styles.container}>
+        <View style = {styles.container} onStartShouldSetResponder =
+            {() => {console.log("test navigation"); navigation.navigate('ContainerPage', {parentBox: element, changeBox: changeFunction})}}>
             <Text style = {styles.text}>{element.title}</Text>
             {element.isEmpty ?
                 <Image style={styles.image} source={require(`../../../assets/empty-box.png`)}/>
