@@ -1,63 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView, Alert, Dimensions} from 'react-native';
-import Box from "./src/Components/Box/Box";
-import AddBox from "./src/Components/AddBox/AddBox";
-import {getBoxes, addNewBox} from "./src/database";
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import BoxPage from "./src/Components/Home/BoxPage";
+import ContainerPage from "./src/Components/ContainerPage/ContainerPage";
+
+const Stack = createStackNavigator()
 
 export default function App() {
-  const [boxes, setBoxes] = useState([])
-
-  useEffect(() => {
-    getBoxes().then(setBoxes).catch(e => {
-      console.log("Ошибка получения информации о коробках", e.message)
-      Alert.alert("Ошибка загрузки информации о коробках")
-    })
-  }, [])
-
-  function newBox(title) {
-    const boxNew = {
-      title,
-      id: (boxes.length + 1),
-      isEmpty: true,
-    }
-    addNewBox(boxNew).then(value => {
-      setBoxes(boxes => [...boxes, boxNew])
-    }).catch( e => {
-      Alert.alert("Ошибка добавления новой коробки")
-      console.log("Ошибка добавления коробки: ", e.message)
-    })
-  }
 
   return (
-    <View style={styles.container}>
-      <AddBox addBox = {newBox}/>
-      <ScrollView style = {styles.list} contentContainerStyle = {styles.listContent}>
-        {boxes.map(box => <Box box = {box} key = {box.id} />)}
-      </ScrollView>
-    </View>
+      <NavigationContainer>
+          <Stack.Navigator>
+              <Stack.Screen
+                  name={'BoxPage'}
+                  component={BoxPage}
+                  options={{ headerShown: false }}
+              />
+              <Stack.Screen name={'ContainerPage'}
+                            component={ContainerPage}
+              />
+          </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    minHeight: Math.round(Dimensions.get('window').height),
-  },
-  inputContainer: {
-    width:'100%',
-    height:'25%'
-  },
-  list: {
-    width: '100%',
-    height: '100%',
-    marginTop: 20,
-  },
-  listContent: {
-    width: '100%',
-    height: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  }
-});

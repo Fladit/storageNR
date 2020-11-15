@@ -1,13 +1,17 @@
 import React from 'react';
 import {Text, View, Image, StyleSheet} from "react-native";
 
-const Box = ({box}) => {
-    let boxImage = 'empty-box.png'
+const Box = ({element}) => {
+    let boxImage = `../../../assets/${element.isEmpty? 'empty-box.png' : 'full-box.png'}`
+
     return (
         <View style = {styles.container}>
-            <Text style = {styles.text}>{box.title}</Text>
-            <Image style = {styles.image} source = {require(`../../../assets/${boxImage}`)}/>
-            <Text style = {styles.text}>{box.id}</Text>
+            <Text style = {styles.text}>{element.title}</Text>
+            {element.isEmpty ?
+                <Image style={styles.image} source={require(`../../../assets/empty-box.png`)}/>
+                : <Image style={styles.image} source={require(`../../../assets/full-box.png`)}/>
+            }
+            <Text style = {styles.text}>{element.id}</Text>
         </View>
     );
 };

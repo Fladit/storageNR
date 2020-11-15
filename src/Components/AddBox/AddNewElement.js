@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button, Alert, StyleSheet} from 'react-native'
 
-export default function AddBox({addBox}) {
+export default function AddNewElement({addElementFunction, buttonTitle, buttonPlaceHolder}) {
     const [value, setValue] = useState('')
 
     function pressHandler() {
         if (value.trim()) {
-            addBox(value)
+            addElementFunction(value)
             setValue('')
         }
         else {
-            Alert.alert("Название коробки не должно быть пустым!")
+            Alert.alert("Название не должно быть пустым!")
         }
     }
     return (
@@ -18,13 +18,13 @@ export default function AddBox({addBox}) {
             <TextInput
                 style = {styles.input}
                 value = {value}
-                placeHolder = {"Введите название коробки"}
+                placeHolder = {buttonPlaceHolder}
                 onChangeText = {setValue}
                 maxLength = {15}
             />
             <Button
                 onPress = {pressHandler}
-                title = "Добавить коробку"
+                title = {buttonTitle}
                 style = {styles.button}
             />
         </View>
