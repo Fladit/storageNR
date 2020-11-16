@@ -14,11 +14,11 @@ export default function App() {
               <Stack.Screen
                   name={'BoxPage'}
                   component={BoxPage}
-                  options={{ headerShown: false }}
+                  options={{ headerShown: false}}
               />
               <Stack.Screen name={'ContainerPage'}
                             component={ContainerPage}
-                            options={{ headerShown: false }}
+                            options={{ headerShown: false}}
               />
           </Stack.Navigator>
       </NavigationContainer>

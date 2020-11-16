@@ -8,6 +8,7 @@ const ContainerPage = ({navigation, route}) => {
     const [containers, setContainers] = useState([])
     const {parentBox, } = route.params
     const changeBox = route.params.changeBox
+
     const selectContainersByBoxID = (boxID, containersArray) => {
         return containersArray.filter(container => container.boxID === boxID)
     }
@@ -32,7 +33,7 @@ const ContainerPage = ({navigation, route}) => {
             isEmpty: true,
         }
         addNewElementToDB(containerNew, CONTAINERS_KEY).then(value => {
-            console.log("add element", parentBox)
+            //console.log("add element", parentBox)
             setContainers(containers => [...containers, containerNew])
             if (parentBox.isEmpty)
             {

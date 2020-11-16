@@ -9,7 +9,6 @@ export default function BoxPage({navigation}) {
     const [boxes, setBoxes] = useState([])
 
     useEffect(() => {
-        navigation.setParams({changeBox: changeBox})
         getElementsFromDBByKey(BOXES_KEY).then(setBoxes).catch(e => {
             console.log("Ошибка получения информации о коробках", e.message)
             Alert.alert("Ошибка загрузки информации о коробках")
@@ -30,7 +29,7 @@ export default function BoxPage({navigation}) {
         })
     }
     function changeBox(boxID, newBoxValue) {
-        console.log("Start changeBox", newBoxValue, 'value')
+        //console.log("Start changeBox", newBoxValue, 'value')
         changeElementFromDBByID(BOXES_KEY, boxID, newBoxValue).then(setBoxes).catch(e => {
             Alert.alert("Ошибка при изменении данных коробки")
             console.log("Ошибка изменения коробки: ", e.message)

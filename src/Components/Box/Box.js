@@ -5,7 +5,7 @@ const Box = ({element, navigation, changeFunction}) => {
 
     return (
         <View style = {styles.container} onStartShouldSetResponder =
-            {() => {console.log("test navigation"); navigation.navigate('ContainerPage', {parentBox: element, changeBox: changeFunction})}}>
+            {() => {navigation.navigate('ContainerPage', {parentBox: element, changeBox: changeFunction})}}>
             <Text style = {styles.text}>{element.title}</Text>
             {element.isEmpty ?
                 <Image style={styles.image} source={require(`../../../assets/empty-box.png`)}/>
@@ -19,7 +19,7 @@ const Box = ({element, navigation, changeFunction}) => {
 const styles = StyleSheet.create({
     container: {
         width: '25%',
-        height: '25%',
+        height: 150,
         justifyContent:'flex-end',
         alignItems: 'center',
     },

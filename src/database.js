@@ -32,7 +32,7 @@ export const getElementsFromDBByKey = async (KEY) => {
             console.log(e)
         }
     }
-    console.log(elements)
+    //console.log(elements)
     return elements
 }
 
@@ -43,7 +43,7 @@ export const assignNewDataByKey = async (KEY, value) => {
 
 
 export const changeElementFromDBByID = async (KEY, id, newValue) => {
-    console.log("changing... on ", newValue)
+    //console.log("changing... on ", newValue)
     let elements = await getElementsFromDBByKey(KEY)
     if (elements.length > 0) {
         elements = elements.map(element => {
@@ -51,10 +51,10 @@ export const changeElementFromDBByID = async (KEY, id, newValue) => {
                 return newValue
             return element
         })
-        console.log("Новый массив: ", elements)
+        //console.log("Новый массив: ", elements)
         await assignNewDataByKey(KEY, elements)
     }
-    console.log("returned value after change: ", elements)
+    //console.log("returned value after change: ", elements)
     return elements
 }
 

@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderBottomWidth: 2,
         padding: 2,
-        marginRight: '10%',
+        marginRight: '5%',
     },
     button: {
-        borderRadius: 15
+        borderRadius: 15,
     }
 
 })

@@ -6,6 +6,7 @@ import {getElementsFromDBByKey, addNewElementToDB} from "../../database";
 
 export default function TemplatePage({elements, addFunction, changeFunction, navigation,
                                          buttonTitle, buttonPlaceHolder, Component}) {
+    console.log(elements)
 
     return (
         <View style={styles.container}>
@@ -20,9 +21,10 @@ export default function TemplatePage({elements, addFunction, changeFunction, nav
 
 const styles = StyleSheet.create({
     container: {
+        position: 'relative',
         flex: 1,
         backgroundColor: '#fff',
-        minHeight: Math.round(Dimensions.get('window').height),
+        //minHeight: Math.round(Dimensions.get('window').height),
     },
     inputContainer: {
         width:'100%',
@@ -31,11 +33,8 @@ const styles = StyleSheet.create({
     list: {
         width: '100%',
         height: '100%',
-        marginTop: 20,
     },
     listContent: {
-        width: '100%',
-        height: '100%',
         flexDirection: 'row',
         flexWrap: 'wrap',
     }
