@@ -13,6 +13,7 @@ export async function addNewElementToDB(element, KEY) {
         } catch (e) {
             console.log(e.message)
         }
+        return elements
     }
     catch (e) {
         console.log(e.message)

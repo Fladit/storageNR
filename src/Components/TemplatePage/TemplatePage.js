@@ -6,7 +6,7 @@ import {getElementsFromDBByKey, addNewElementToDB} from "../../database";
 
 export default function TemplatePage({elements, addFunction, changeFunction, navigation,
                                          buttonTitle, buttonPlaceHolder, Component}) {
-    console.log(elements)
+    //console.log(elements)
 
     return (
         <View style={styles.container}>
