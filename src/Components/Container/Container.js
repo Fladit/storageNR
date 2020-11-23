@@ -1,12 +1,11 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native'
-import {Dimensions} from "react-native";
 
-const Container = ({element}) => {
+const Container = ({element, navigation}) => {
     let containerImage = `../../../assets/message.png`
 
     return (
-        <View style = {styles.container}>
+        <View style = {styles.container} onStartShouldSetResponder = {() => {navigation.navigate('ContainerInfo', {parentContainer: element})}}>
             <Text style = {styles.text}>{element.title}</Text>
             <Image style={styles.image} source={require(containerImage)}/>
             <Text style = {styles.text}>{element.id}</Text>

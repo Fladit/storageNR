@@ -48,7 +48,7 @@ const ContainerPage = ({navigation, route}) => {
 
     return (
             <TemplatePage elements = {containers} addFunction = {insertNewContainer} buttonTitle = {"Добавить контейнер"}
-                          buttonPlaceHolder = {"Введите название контейнера"} Component = {Container}/>
+                          buttonPlaceHolder = {"Введите название контейнера"} Component = {Container} navigation={navigation}/>
     );
 };
 

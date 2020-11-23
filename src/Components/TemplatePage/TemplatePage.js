@@ -5,7 +5,7 @@ import AddNewElement from "../AddBox/AddNewElement";
 import {getElementsFromDBByKey, addNewElementToDB} from "../../database";
 
 export default function TemplatePage({elements, addFunction, changeFunction, navigation,
-                                         buttonTitle, buttonPlaceHolder, Component}) {
+                                         buttonTitle, buttonPlaceHolder, Component, parent}) {
     //console.log(elements)
 
     return (
