@@ -44,16 +44,26 @@ export const assignNewDataByKey = async (KEY, value) => {
 
 
 export const changeElementFromDBByID = async (KEY, id, newValue) => {
-    //console.log("changing... on ", newValue)
     let elements = await getElementsFromDBByKey(KEY)
     if (elements.length > 0) {
-        elements = elements.map(element => {
-            if (element.id === id)
-                return newValue
-            return element
-        })
+        if (KEY === BOXES_KEY) {
+            elements = elements.map(element => {
+                if (element.id === id)
+                    return newValue
+                return element
+            })
+            await assignNewDataByKey(KEY, elements)
+        }
+        else if (KEY === CONTAINERS_KEY) {
+            elements = elements.map(element => {
+                if (element.boxID === newValue.boxID && element.id === newValue.id)
+                    return newValue;
+                return element
+            })
+            await assignNewDataByKey(KEY, elements)
+            elements = elements.filter(element => element.boxID === newValue.boxID)
+        }
         //console.log("Новый массив: ", elements)
-        await assignNewDataByKey(KEY, elements)
     }
     //console.log("returned value after change: ", elements)
     return elements

@@ -8,8 +8,8 @@ const Box = ({element, navigation, changeFunction}) => {
             {() => {navigation.navigate('ContainerPage', {parentBox: element, changeBox: changeFunction})}}>
             <Text style = {styles.text}>{element.title}</Text>
             {element.isEmpty ?
-                <Image style={styles.image} source={require(`../../../assets/empty-box.png`)}/>
-                : <Image style={styles.image} source={require(`../../../assets/full-box.png`)}/>
+                <Image style={styles.image} source={require(`../../../assets/img/empty-box.png`)}/>
+                : <Image style={styles.image} source={require(`../../../assets/img/full-box.png`)}/>
             }
             <Text style = {styles.text}>{element.id}</Text>
         </View>

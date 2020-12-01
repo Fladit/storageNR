@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Alert, View} from 'react-native'
-import {addNewElementToDB, BOXES_KEY, CONTAINERS_KEY, getElementsFromDBByKey} from "../../database";
+import {
+    addNewElementToDB,
+    BOXES_KEY,
+    changeElementFromDBByID,
+    CONTAINERS_KEY,
+    getElementsFromDBByKey
+} from "../../database";
 import TemplatePage from "../TemplatePage/TemplatePage";
 import Container from "../Container/Container";
 
@@ -12,6 +18,7 @@ const ContainerPage = ({navigation, route}) => {
     const selectContainersByBoxID = (boxID, containersArray) => {
         return containersArray.filter(container => container.boxID === boxID)
     }
+
     useEffect(() => {
         getElementsFromDBByKey(CONTAINERS_KEY).then(value => {
             if (value.length > 0) {
@@ -30,7 +37,7 @@ const ContainerPage = ({navigation, route}) => {
             id: (containers.length + 1),
             boxID,
             title,
-            isEmpty: true,
+            isEmpty: false,
         }
         addNewElementToDB(containerNew, CONTAINERS_KEY).then(value => {
             //console.log("add element", parentBox)
@@ -46,8 +53,17 @@ const ContainerPage = ({navigation, route}) => {
         })
     }
 
+    function changeContainer (container) {
+        console.log(container)
+        changeElementFromDBByID(CONTAINERS_KEY, container.id, container).then(setContainers).catch(e => {
+            Alert.alert("Ошибка при изменении данных контейнера")
+            console.log("Ошибка изменения контейнера: ", e.message)
+        })
+    }
+
+
     return (
-            <TemplatePage elements = {containers} addFunction = {insertNewContainer} buttonTitle = {"Добавить контейнер"}
+            <TemplatePage elements = {containers} changeFunction = {changeContainer} addFunction = {insertNewContainer} buttonTitle = {"Добавить контейнер"}
                           buttonPlaceHolder = {"Введите название контейнера"} Component = {Container} navigation={navigation}/>
     );
 };
