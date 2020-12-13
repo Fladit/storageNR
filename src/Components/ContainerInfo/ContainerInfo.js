@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import {View, Button, Text, StyleSheet, ImageBackground, TouchableOpacity, Image} from 'react-native'
-
 const EMPTY = 'отсутствует'
+import Containers from "../../../store/Containers";
 
 const ContainerInfo = ({navigation, route}) => {
-    const {changeContainer} = route.params
+    const changeContainer = Containers.changeContainerById
     const {parentContainer} = route.params
     const [title, setTitle] = useState(parentContainer.title || EMPTY)
     const boxID = parentContainer.boxID
@@ -17,7 +17,7 @@ const ContainerInfo = ({navigation, route}) => {
         parentContainer.isEmpty = true
         setTitle(EMPTY)
         setDescription(EMPTY);
-        changeContainer(parentContainer)
+        changeContainer(parentContainer.id, parentContainer)
     }
 
     return (

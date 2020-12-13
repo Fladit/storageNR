@@ -1,11 +1,11 @@
 import React from 'react';
 import {Text, View, Image, StyleSheet} from "react-native";
 
-const Box = ({element, navigation, changeFunction}) => {
+const Box = ({element, navigation}) => {
 
     return (
         <View style = {styles.container} onStartShouldSetResponder =
-            {() => {navigation.navigate('ContainerPage', {parentBox: element, changeBox: changeFunction})}}>
+            {() => {navigation.navigate('ContainerPage', {parentBox: element,})}}>
             <Text style = {styles.text}>{element.title}</Text>
             {element.isEmpty ?
                 <Image style={styles.image} source={require(`../../../assets/img/empty-box.png`)}/>
@@ -14,7 +14,7 @@ const Box = ({element, navigation, changeFunction}) => {
             <Text style = {styles.text}>{element.id}</Text>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {

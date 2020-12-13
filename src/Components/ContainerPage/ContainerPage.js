@@ -1,71 +1,34 @@
-import React, {useEffect, useState} from 'react';
-import {Alert, View} from 'react-native'
-import {
-    addNewElementToDB,
-    BOXES_KEY,
-    changeElementFromDBByID,
-    CONTAINERS_KEY,
-    getElementsFromDBByKey
-} from "../../database";
+import React, {useEffect} from 'react';
 import TemplatePage from "../TemplatePage/TemplatePage";
 import Container from "../Container/Container";
+import {observer} from "mobx-react-lite";
+import Containers from "../../../store/Containers";
+import {toJS} from "mobx";
 
-const ContainerPage = ({navigation, route}) => {
-    const [containers, setContainers] = useState([])
+const ContainerPage = observer(({navigation, route}) => {
     const {parentBox, } = route.params
-    const changeBox = route.params.changeBox
+    const containers = Containers.selectContainersByBoxId(parentBox.id)
+    /*
+    console.log("parentBox: ", toJS(parentBox))
+    console.log(toJS(containers.containers))
 
-    const selectContainersByBoxID = (boxID, containersArray) => {
-        return containersArray.filter(container => container.boxID === boxID)
-    }
+     */
 
+    /*
     useEffect(() => {
-        getElementsFromDBByKey(CONTAINERS_KEY).then(value => {
-            if (value.length > 0) {
-            const selectedContainers = selectContainersByBoxID(parentBox.id, value)
-            setContainers(selectedContainers)
-            }
-        }).catch(e => {
-            console.log("Ошибка получения информации о контейнерах", e.message)
-            Alert.alert("Ошибка загрузки информации о контейнерах")
-        })
+        Containers.getContainersFromDB(parentBox.id)
     }, [])
 
-    function insertNewContainer(title) {
-        const boxID = parentBox.id
-        const containerNew = {
-            id: (containers.length + 1),
-            boxID,
-            title,
-            isEmpty: false,
-        }
-        addNewElementToDB(containerNew, CONTAINERS_KEY).then(value => {
-            //console.log("add element", parentBox)
-            setContainers(containers => [...containers, containerNew])
-            if (parentBox.isEmpty)
-            {
-                parentBox.isEmpty = false
-                changeBox(parentBox.id, parentBox)
-            }
-        }).catch( e => {
-            Alert.alert("Ошибка добавления нового контейнера")
-            console.log("Ошибка добавления контейнера: ", e.message)
-        })
-    }
+     */
 
-    function changeContainer (container) {
-        console.log(container)
-        changeElementFromDBByID(CONTAINERS_KEY, container.id, container).then(setContainers).catch(e => {
-            Alert.alert("Ошибка при изменении данных контейнера")
-            console.log("Ошибка изменения контейнера: ", e.message)
-        })
-    }
+    const addNewContainer = (title) => Containers.addNewContainer(title, parentBox, containers.length + 1)
 
 
     return (
-            <TemplatePage elements = {containers} changeFunction = {changeContainer} addFunction = {insertNewContainer} buttonTitle = {"Добавить контейнер"}
+            <TemplatePage elements = {containers} changeFunction = {Containers.changeContainerById} addFunction = {addNewContainer}
+                          buttonTitle = {"Добавить контейнер"}
                           buttonPlaceHolder = {"Введите название контейнера"} Component = {Container} navigation={navigation}/>
     );
-};
+});
 
 export default ContainerPage;

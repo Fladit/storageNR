@@ -61,7 +61,7 @@ export const changeElementFromDBByID = async (KEY, id, newValue) => {
                 return element
             })
             await assignNewDataByKey(KEY, elements)
-            elements = elements.filter(element => element.boxID === newValue.boxID)
+            //elements = elements.filter(element => element.boxID === newValue.boxID)
         }
         //console.log("Новый массив: ", elements)
     }

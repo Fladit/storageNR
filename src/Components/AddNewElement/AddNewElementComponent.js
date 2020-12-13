@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button, Alert, StyleSheet} from 'react-native'
+import {observer} from "mobx-react-lite";
 
-export default function AddNewElement({addElementFunction, buttonTitle, buttonPlaceHolder}) {
+const AddNewElementComponent = ({addElementFunction, buttonTitle, buttonPlaceHolder}) => {
     const [value, setValue] = useState('')
 
     function pressHandler() {
@@ -31,6 +32,7 @@ export default function AddNewElement({addElementFunction, buttonTitle, buttonPl
     );
 }
 
+
 const styles = StyleSheet.create({
     container: {
         width: '100%',
@@ -51,4 +53,6 @@ const styles = StyleSheet.create({
     }
 
 })
+
+export default AddNewElementComponent;
 
