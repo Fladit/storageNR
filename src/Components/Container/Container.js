@@ -1,10 +1,10 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native'
 
-const Container = ({element, changeFunction, navigation}) => {
+const Container = ({element, navigation}) => {
 
     return (
-        <View style = {styles.container} onStartShouldSetResponder = {() => {navigation.navigate('ContainerInfo', {parentContainer: element, changeContainer: changeFunction,})}}>
+        <View style = {styles.container} onStartShouldSetResponder = {() => {navigation.navigate('ContainerInfo', {parentContainer: element, })}}>
             <Text style = {styles.text}>{element.title}</Text>
             {
                 element.isEmpty?

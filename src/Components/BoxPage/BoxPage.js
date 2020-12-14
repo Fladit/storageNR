@@ -1,44 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView, Alert, Dimensions} from 'react-native';
+import React, {useEffect} from 'react';
 import Box from "../Box/Box";
-import {getElementsFromDBByKey, addNewElementToDB, BOXES_KEY, changeElementFromDBByID} from "../../database";
 import TemplatePage from "../TemplatePage/TemplatePage";
+import Boxes from "../../../store/Boxes";
+import {observer} from "mobx-react-lite";
+import {toJS} from "mobx";
 
-export default function BoxPage({navigation}) {
-    const [boxes, setBoxes] = useState([])
+const BoxPage = observer(({navigation}) => {
 
+    /*
     useEffect(() => {
-        getElementsFromDBByKey(BOXES_KEY).then(setBoxes).catch(e => {
-            console.log("Ошибка получения информации о коробках", e.message)
-            Alert.alert("Ошибка загрузки информации о коробках")
-        })
+        Boxes.getBoxesFromDB()
     }, [])
 
-    function insertNewBox(title) {
-        const boxNew = {
-            title,
-            id: (boxes.length + 1),
-            isEmpty: true,
-        }
-        addNewElementToDB(boxNew, BOXES_KEY).then(value => {
-            setBoxes(value)
-        }).catch( e => {
-            Alert.alert("Ошибка добавления новой коробки")
-            console.log("Ошибка добавления коробки: ", e.message)
-        })
-    }
-    function changeBox(boxID, newBoxValue) {
-        //console.log("Start changeBox", newBoxValue, 'value')
-        changeElementFromDBByID(BOXES_KEY, boxID, newBoxValue).then(setBoxes).catch(e => {
-            Alert.alert("Ошибка при изменении данных коробки")
-            console.log("Ошибка изменения коробки: ", e.message)
-        })
-    }
+     */
 
     return (
-            <TemplatePage elements={boxes} addFunction = {insertNewBox} changeFunction = {changeBox} buttonTitle = {"Добавить коробку"}
-                          buttonPlaceHolder = {"Введите название коробки"} Component = {Box} navigation = {navigation}/>
+        <TemplatePage elements={Boxes.boxes} addFunction = {Boxes.addNewBox} changeFunction = {Boxes.changeBoxById} buttonTitle = {"Добавить коробку"}
+                      buttonPlaceHolder = {"Введите название коробки"} Component = {Box} navigation = {navigation}/>
     );
-}
+})
+
+export default BoxPage;
 

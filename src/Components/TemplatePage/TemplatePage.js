@@ -1,16 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView, Alert, Dimensions} from 'react-native';
-import Box from "../Box/Box";
-import AddNewElement from "../AddBox/AddNewElement";
-import {getElementsFromDBByKey, addNewElementToDB} from "../../database";
+import React from 'react';
+import { StyleSheet, View, ScrollView,} from 'react-native';
+import AddNewElementComponent from "../AddNewElement/AddNewElementComponent";
 
-export default function TemplatePage({elements, addFunction, changeFunction, navigation,
-                                         buttonTitle, buttonPlaceHolder, Component, parent}) {
-    //console.log(elements)
-
+const TemplatePage = ({elements, addFunction, changeFunction, navigation,
+                          buttonTitle, buttonPlaceHolder, Component}) => {
     return (
         <View style={styles.container}>
-            <AddNewElement addElementFunction = {addFunction} buttonTitle={buttonTitle} buttonPlaceHolder={buttonPlaceHolder}/>
+            <AddNewElementComponent addElementFunction = {addFunction} buttonTitle={buttonTitle} buttonPlaceHolder={buttonPlaceHolder}/>
             <ScrollView style = {styles.list} contentContainerStyle = {styles.listContent}>
                 {elements.map(element => <Component element = {element} changeFunction = {changeFunction}
                                                     navigation = {navigation} key = {element.id} />)}
@@ -18,6 +14,9 @@ export default function TemplatePage({elements, addFunction, changeFunction, nav
         </View>
     );
 }
+
+export default TemplatePage;
+
 
 const styles = StyleSheet.create({
     container: {
