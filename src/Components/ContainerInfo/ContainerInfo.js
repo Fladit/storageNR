@@ -54,7 +54,18 @@ const ContainerInfo = ({navigation, route}) => {
                         <TextInput style = {styles.input} value={title.value} onChangeText={title.onChangeText} maxLength = {15} />
                     }
                 </View>
-                <View style={styles.rowView}>
+                <Text style = {styles.textView}>
+                    Описание:
+                </Text>
+                <TextInput style = {styles.descriptionArea} value={description.value} onChangeText={description.onChangeText}
+                           editable={isEditActive} multiline={true} maxLength = {150} />
+            </View>
+        </View>
+    )
+}
+
+/*
+<View style={styles.rowView} >
                     <Text style = {styles.textView}>
                         Описание:
                     </Text>
@@ -64,10 +75,8 @@ const ContainerInfo = ({navigation, route}) => {
                         <TextInput style = {styles.input} value={description.value} onChangeText={description.onChangeText} maxLength = {150} />
                     }
                 </View>
-            </View>
-        </View>
-    )
-}
+
+ */
 
 const styles = StyleSheet.create({
     container: {
@@ -99,6 +108,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     infoView: {
+        marginTop: 15,
         zIndex: 0,
         position: 'absolute',
         width: '100%',
@@ -107,14 +117,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textView: {
-        marginLeft: 10,
         fontSize: 25,
+        marginTop: 10,
     },
     rowView: {
-        marginTop: 20,
+        marginTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
+    },
+    descriptionArea: {
+        marginTop: 15,
+        borderWidth: 2,
+        padding: 5,
+        fontSize: 25,
+        width: "80%",
+        height: "30%",
+        textAlignVertical: 'top'
     }
 })
 
