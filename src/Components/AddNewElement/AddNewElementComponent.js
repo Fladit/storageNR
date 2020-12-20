@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {View, TextInput, Button, Alert, StyleSheet} from 'react-native'
-import {observer} from "mobx-react-lite";
+import {View, TextInput, Button, Alert, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 const AddNewElementComponent = ({addElementFunction, buttonTitle, buttonPlaceHolder}) => {
     const [value, setValue] = useState('')
@@ -19,15 +18,15 @@ const AddNewElementComponent = ({addElementFunction, buttonTitle, buttonPlaceHol
             <TextInput
                 style = {styles.input}
                 value = {value}
-                placeHolder = {buttonPlaceHolder}
+                placeholder = {buttonPlaceHolder}
                 onChangeText = {setValue}
                 maxLength = {15}
             />
-            <Button
+            <TouchableOpacity
                 onPress = {pressHandler}
-                title = {buttonTitle}
-                style = {styles.button}
-            />
+                style = {styles.button}>
+                <Text style={{fontWeight: 'bold', fontSize: 16, textAlign: 'center',}}>{buttonTitle}</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -37,8 +36,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         flexDirection: 'row',
-        marginTop: 30,
-        padding: 10,
+        padding: '5%',
     },
 
     input: {
@@ -46,12 +44,17 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderBottomWidth: 2,
         padding: 2,
-        marginRight: '5%',
     },
     button: {
-        borderRadius: 15,
-    }
-
+        minWidth: '40%',
+        width: '45%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: '7%',
+        borderWidth: 2,
+        borderRadius: 10,
+        backgroundColor: '#00B3FF',
+    },
 })
 
 export default AddNewElementComponent;

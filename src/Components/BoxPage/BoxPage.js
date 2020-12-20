@@ -16,7 +16,7 @@ const BoxPage = observer(({navigation}) => {
 
     return (
         <TemplatePage elements={Boxes.boxes} addFunction = {Boxes.addNewBox} changeFunction = {Boxes.changeBoxById} buttonTitle = {"Добавить коробку"}
-                      buttonPlaceHolder = {"Введите название коробки"} Component = {Box} navigation = {navigation}/>
+                      buttonPlaceHolder = {"Название коробки"} Component = {Box} navigation = {navigation}/>
     );
 })
 

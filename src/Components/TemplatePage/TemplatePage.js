@@ -1,19 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, View, ScrollView,} from 'react-native';
 import AddNewElementComponent from "../AddNewElement/AddNewElementComponent";
+import SearchComponent from "../SearchComponent/SearchComponent";
+import Container from "../Container/Container";
+import {observer} from "mobx-react-lite";
 
-const TemplatePage = ({elements, addFunction, changeFunction, navigation,
+const TemplatePage = observer(({elements, addFunction, changeFunction, navigation,
                           buttonTitle, buttonPlaceHolder, Component}) => {
+    const [searchElements, setSearchElements] = useState([])
+    const [isSearching, setIsSearching] = useState(false)
+
     return (
         <View style={styles.container}>
+            <SearchComponent elements={elements} setSearchElements={setSearchElements} isSearching={isSearching} setIsSearching={setIsSearching}
+                             />
             <AddNewElementComponent addElementFunction = {addFunction} buttonTitle={buttonTitle} buttonPlaceHolder={buttonPlaceHolder}/>
-            <ScrollView style = {styles.list} contentContainerStyle = {styles.listContent}>
-                {elements.map(element => <Component element = {element} changeFunction = {changeFunction}
-                                                    navigation = {navigation} key = {element.id} />)}
-            </ScrollView>
+            {isSearching ?
+                <ScrollView style = {styles.list} contentContainerStyle = {styles.listContent}>
+                    {searchElements.map(element => <Container element = {element}
+                                                        navigation = {navigation} key = {"" + element.id + "" + element.boxID} />)}
+                </ScrollView>
+                :
+                <ScrollView style = {styles.list} contentContainerStyle = {styles.listContent}>
+                    {elements.map(element => <Component element = {element}
+                                                        navigation = {navigation} key = {element.id} />)}
+                </ScrollView>
+            }
         </View>
     );
-}
+})
 
 export default TemplatePage;
 

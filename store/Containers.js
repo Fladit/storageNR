@@ -36,7 +36,7 @@ class Containers {
             id: nextID,
             boxID,
             title,
-            isEmpty: true,
+            isEmpty: false,
         }
         addNewElementToDB(containerNew, CONTAINERS_KEY).then(res => {
             this.setContainers(res)

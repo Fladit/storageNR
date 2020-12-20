@@ -27,7 +27,7 @@ const ContainerPage = observer(({navigation, route}) => {
     return (
             <TemplatePage elements = {containers} changeFunction = {Containers.changeContainerById} addFunction = {addNewContainer}
                           buttonTitle = {"Добавить контейнер"}
-                          buttonPlaceHolder = {"Введите название контейнера"} Component = {Container} navigation={navigation}/>
+                          buttonPlaceHolder = {"Название контейнера"} Component = {Container} navigation={navigation}/>
     );
 });
 

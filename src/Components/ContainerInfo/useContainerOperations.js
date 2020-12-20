@@ -19,7 +19,7 @@ const useContainerOperations = (parentContainer, setParentContainer, getTitle, s
     }
 
     const applyChanges = () => {
-        setParentContainer((parent) => {return {...parent, title: getTitle, description: getDescription}})
+        setParentContainer((parent) => {return {...parent, title: getTitle, description: getDescription, isEmpty: false}})
         setTitle(getTitle || EMPTY)
         setDescription(getDescription || EMPTY)
         setIsEditActive(isEdit => !isEdit)

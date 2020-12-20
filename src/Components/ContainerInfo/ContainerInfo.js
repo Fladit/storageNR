@@ -64,19 +64,6 @@ const ContainerInfo = ({navigation, route}) => {
     )
 }
 
-/*
-<View style={styles.rowView} >
-                    <Text style = {styles.textView}>
-                        Описание:
-                    </Text>
-                    {!isEditActive?
-                        <Text style={styles.textView}>{description.value}</Text>
-                        :
-                        <TextInput style = {styles.input} value={description.value} onChangeText={description.onChangeText} maxLength = {150} />
-                    }
-                </View>
-
- */
 
 const styles = StyleSheet.create({
     container: {
